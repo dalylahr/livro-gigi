@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogo da Memória da Gigi</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      background: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 700px;
+      padding: 10px;
+    }
+    .card {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      cursor: pointer;
+      perspective: 1000px;
+    }
+    .card-inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+    }
+    .card-front {
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #ccc;
+    }
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+    .card-back {
+      background: #2d89ef;
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="game-board" id="gameBoard"></div>
+
+  <script>
+    const imagens = [
+      "img1.jpg",
+      "img2.jpg",
+      "img3.jpg",
+      "img4.jpg",
+      "img5.jpg",
+      "img6.jpg",
+    ];
+
+    const board = document.getElementById("gameBoard");
+    let cards = [...imagens, ...imagens];
+    let flipped = [];
+    let lock = false;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function createCard(imgSrc) {
+      const card = document.createElement("div");
+      card.classList.add("card");
+
+      const inner = document.createElement("div");
+      inner.classList.add("card-inner");
+
+      const front = document.createElement("div");
+      front.classList.add("card-front");
+      const img = document.createElement("img");
+      img.src = `imagens/${imgSrc}`;
+      front.appendChild(img);
+
+      const back = document.createElement("div");
+      back.classList.add("card-back");
+
+      inner.appendChild(front);
+      inner.appendChild(back);
+      card.appendChild(inner);
+
+      card.addEventListener("click", () => {
+        if (lock || card.classList.contains("flipped")) return;
+        card.classList.add("flipped");
+        flipped.push({ card, imgSrc });
+
+        if (flipped.length === 2) {
+          lock = true;
+          const [first, second] = flipped;
+          if (first.imgSrc !== second.imgSrc) {
+            setTimeout(() => {
+              first.card.classList.remove("flipped");
+              second.card.classList.remove("flipped");
+              flipped = [];
+              lock = false;
+            }, 1000);
+          } else {
+            flipped = [];
+            lock = false;
+          }
+        }
+      });
+
+      return card;
+    }
+
+    shuffle(cards);
+    cards.forEach((img) => {
+      const c = createCard(img);
+      board.appendChild(c);
+    });
+  </script>
+</body>
+</html>
