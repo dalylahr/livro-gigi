@@ -1,0 +1,40 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #f5f5dc;
+  margin: 0;
+  padding: 20px;
+}
+h1 {
+  color: #444;
+}
+.game-board {
+  width: 90vw;
+  max-width: 600px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.card {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: #ddd;
+  cursor: pointer;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.card.flipped img {
+  display: block;
+}
+.card.matched {
+  pointer-events: none;
+  opacity: 0.6;
+}
