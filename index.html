@@ -1,57 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Uma aventura até o rio Araguaia</title>
-
-  <style>
-    body {
-      background: #eeeeee;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-    #flipbook {
-      width: 960px;
-      height: 600px;
-    }
-    .page {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-    }
-  </style>
-
-  <!-- jQuery (Turn.js precisa) -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Turn.js (biblioteca de flipbook) -->
-  <script src="https://www.turnjs.com/lib/turn.min.js"></script>
+  <meta charset="UTF-8" />
+  <title>Uma Aventura até o Rio Araguaia</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div id="flipbook">
-    <div class="page" style="background-image: url('imagens/pagina0.jpg');"></div>
-    <div class="page" style="background-image: url('imagens/pagina1.jpg');"></div>
-    <div class="page" style="background-image: url('imagens/pagina2.jpg');"></div>
-    <div class="page" style="background-image: url('imagens/pagina3.jpg');"></div>
-    <div class="page" style="background-image: url('imagens/pagina4.jpg');"></div>
-    <div class="page" style="background-image: url('imagens/pagina5.jpg');"></div>
-    <div class="page" style="background-image: url('imagens/pagina6.jpg');"></div>
-    <div class="page" style="background-image: url('imagens/pagina7.jpg');"></div>
-    <div class="page" style="background-image: url('imagens/pagina8.jpg');"></div>
+<div class="book-outer">
+  <div class="flipbook">
+    <div class="page"><img src="img/pagina1.jpg" /></div>
+    <div class="page"><img src="img/pagina2.jpg" /></div>
+    <div class="page"><img src="img/pagina3.jpg" /></div>
+    <div class="page"><img src="img/pagina4.jpg" /></div>
+    <div class="page"><img src="img/pagina5.jpg" /></div>
+    <div class="page"><img src="img/pagina6.jpg" /></div>
+    <div class="page"><img src="img/pagina7.jpg" /></div>
+    <div class="page"><img src="img/pagina8.jpg" /></div>
+    <div class="page"><img src="img/pagina9.jpg" /></div>
   </div>
+</div>
 
-  <script>
-    $("#flipbook").turn({
-      width: 960,
-      height: 600,
-      autoCenter: true
-    });
-  </script>
+<script src="jquery.min.js"></script>
+<script src="turn.min.js"></script>
+<script>
+  $('.flipbook').turn({
+    width: 960,
+    height: 540,
+    autoCenter: true,
+  });
+</script>
 
 </body>
 </html>
