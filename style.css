@@ -1,6 +1,11 @@
-html, body {
+{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
   height: 100%;
   overflow: hidden;
   background: #ddd;
@@ -8,13 +13,14 @@ html, body {
 
 body {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .book-outer {
   width: 1155px;
   height: 768px;
+  overflow: hidden;
 }
 
 .flipbook {
@@ -31,4 +37,5 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
 }
