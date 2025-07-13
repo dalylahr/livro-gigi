@@ -29,26 +29,32 @@
 <script src="turn.min.js"></script>
   
 <script>
-  function ajustarFlipbook() {
-    const largura = window.innerWidth;
-    const altura = window.innerHeight;
-    const margem = 40; // margem de segurança
+function ajustarFlipbook() {
+  const larguraTela = window.innerWidth;
+  const alturaTela = window.innerHeight;
+  const margem = 40;
 
-    const larguraImagem = 1155;
-    const alturaImagem = 768;
-    let novaLargura = largura - margem;
-    let novaAltura = (novaLargura * alturaImagem) / larguraImagem;
+  const larguraOriginal = 1155;
+  const alturaOriginal = 768;
 
-    if (novaAltura > altura - margem) {
-      novaAltura = altura - margem;
-      novaLargura = (novaAltura * larguraImagem) / alturaImagem;
+  let novaLargura = larguraOriginal;
+  let novaAltura = alturaOriginal;
+
+  // Se for menor que o original, ajusta proporcionalmente
+  if (larguraTela < larguraOriginal + margem || alturaTela < alturaOriginal + margem) {
+    novaLargura = larguraTela - margem;
+    novaAltura = (novaLargura * alturaOriginal) / larguraOriginal;
+
+    if (novaAltura > alturaTela - margem) {
+      novaAltura = alturaTela - margem;
+      novaLargura = (novaAltura * larguraOriginal) / alturaOriginal;
     }
-
-    $('.flipbook').turn('size', novaLargura, novaAltura);
-    $('.flipbook').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
-    $('.book-outer').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
   }
 
+  $('.flipbook').turn('size', novaLargura, novaAltura);
+  $('.flipbook').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
+  $('.book-outer').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
+}
   $(document).ready(function () {
     $('.flipbook').turn({
       width: 1155,
