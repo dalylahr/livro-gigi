@@ -39,3 +39,24 @@ body {
   object-fit: contain;
   display: block;
 }
+.nav-button {
+  position: fixed;
+  top: 50%;
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  user-select: none;
+  border-radius: 5px;
+  transform: translateY(-50%);
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.nav-button.left {
+  left: 10px;
+}
+
+.nav-button.right {
+  right: 10px;
+}
