@@ -30,23 +30,35 @@
   
 <script>
   function ajustarFlipbook() {
-    const largura = Math.min(window.innerWidth * 0.95, 1155);
-    const altura = largura * 768 / 1155;
+    const largura = window.innerWidth;
+    const altura = window.innerHeight;
+    const margem = 40; // margem de segurança
 
-    $('.flipbook').turn({
-      width: largura,
-      height: altura,
-      autoCenter: true,
-      display: 'single'
-    });
+    const larguraImagem = 1155;
+    const alturaImagem = 768;
+    let novaLargura = largura - margem;
+    let novaAltura = (novaLargura * alturaImagem) / larguraImagem;
+
+    if (novaAltura > altura - margem) {
+      novaAltura = altura - margem;
+      novaLargura = (novaAltura * larguraImagem) / alturaImagem;
+    }
+
+    $('.flipbook').turn('size', novaLargura, novaAltura);
+    $('.flipbook').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
+    $('.book-outer').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
   }
 
   $(document).ready(function () {
-    ajustarFlipbook();
-    $(window).on('resize', function () {
-      $('.flipbook').turn('destroy').html($('.flipbook').html());
-      ajustarFlipbook();
+    $('.flipbook').turn({
+      width: 1155,
+      height: 768,
+      autoCenter: true,
+      display: 'single'
     });
+
+    ajustarFlipbook();
+    $(window).on('resize orientationchange', ajustarFlipbook);
   });
 </script>
 
