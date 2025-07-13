@@ -6,18 +6,18 @@ body {
 }
 
 .book-outer {
-  width: 540px;
-  height: 720px;
+  width: 1155px;
+  height: 768px;
 }
 
 .flipbook {
-  width: 540px;
-  height: 720px;
+  width: 1155px;
+  height: 768px;
 }
 
 .page {
-  width: 540px;
-  height: 720px;
+  width: 1155px;
+  height: 768px;
 }
 
 .page img {
