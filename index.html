@@ -27,13 +27,25 @@
 
 <script src="jquery.min.js"></script>
 <script src="turn.min.js"></script>
+  
 <script>
-  $(document).ready(function () {
+  function ajustarFlipbook() {
+    const largura = Math.min(window.innerWidth * 0.95, 1155);
+    const altura = largura * 768 / 1155;
+
     $('.flipbook').turn({
-      width: 1155,
-      height: 770,
+      width: largura,
+      height: altura,
       autoCenter: true,
       display: 'single'
+    });
+  }
+
+  $(document).ready(function () {
+    ajustarFlipbook();
+    $(window).on('resize', function () {
+      $('.flipbook').turn('destroy').html($('.flipbook').html());
+      ajustarFlipbook();
     });
   });
 </script>
