@@ -1,18 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Uma aventura até o rio Araguaia</title>
+
   <style>
-    body { background: #e5e5e5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-    #flipbook { width: 960px; height: 600px; }
-    .page { width: 100%; height: 100%; background-size: cover; background-position: center; }
+    body {
+      background: #eeeeee;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #flipbook {
+      width: 960px;
+      height: 600px;
+    }
+    .page {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
   </style>
+
+  <!-- jQuery (Turn.js precisa) -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Turn.js (biblioteca de flipbook) -->
   <script src="https://www.turnjs.com/lib/turn.min.js"></script>
 </head>
 <body>
+
   <div id="flipbook">
     <div class="page" style="background-image: url('imagens/pagina0.jpg');"></div>
     <div class="page" style="background-image: url('imagens/pagina1.jpg');"></div>
@@ -23,10 +43,15 @@
     <div class="page" style="background-image: url('imagens/pagina6.jpg');"></div>
     <div class="page" style="background-image: url('imagens/pagina7.jpg');"></div>
     <div class="page" style="background-image: url('imagens/pagina8.jpg');"></div>
-
   </div>
+
   <script>
-    $("#flipbook").turn({ width: 960, height: 600, autoCenter: true });
+    $("#flipbook").turn({
+      width: 960,
+      height: 600,
+      autoCenter: true
+    });
   </script>
+
 </body>
 </html>
