@@ -1,98 +1,40 @@
-const cardsArray = [
-  'gigi.png',
-  'arara.png',
-  'gigi-mae.png',
-  'gigi-urubu.png',
-  'leo.png',
-  'lobo.png',
-  'mae.png',
-  'placa.png',
-  'preservada.png',
-  'urubu.png',
-  'tatu.png'
-];
+<script src="jquery.min.js"></script>
+<script src="turn.min.js"></script>
 
-let selectedCards = [];
-let matchedCards = [];
+<script>
+  function ajustarFlipbook() {
+    const larguraTela = window.innerWidth;
+    const alturaTela = window.innerHeight;
+    const margem = 20;
 
-function createCard(src) {
-  const card = document.createElement('div');
-  card.classList.add('memory-card');
-  card.dataset.image = src;
+    const larguraOriginal = 1155;
+    const alturaOriginal = 768;
+    const proporcao = larguraOriginal / alturaOriginal;
 
-  const front = document.createElement('img');
-  front.src = `img/${src}`;
-  front.classList.add('front-face');
+    let novaLargura = larguraTela - margem * 2;
+    let novaAltura = novaLargura / proporcao;
 
-  const back = document.createElement('div');
-  back.classList.add('back-face');
-
-  card.appendChild(front);
-  card.appendChild(back);
-
-  card.addEventListener('click', flipCard);
-
-  return card;
-}
-
-function flipCard() {
-  if (this.classList.contains('flipped') || selectedCards.length >= 2) return;
-
-  this.classList.add('flipped');
-  selectedCards.push(this);
-
-  if (selectedCards.length === 2) {
-    checkForMatch();
-  }
-}
-
-function checkForMatch() {
-  const [card1, card2] = selectedCards;
-  const isMatch = card1.dataset.image === card2.dataset.image;
-
-  if (isMatch) {
-    matchedCards.push(card1, card2);
-    selectedCards = [];
-
-    if (document.querySelectorAll('.memory-card.flipped').length === cardsArray.length * 2) {
-      setTimeout(() => {
-        alert('Parabéns, você ajudou a Gigi em sua jornada até o Araguaia!');
-        resetGame();
-      }, 500);
+    // Se ainda estiver muito alto, ajusta pela altura
+    if (novaAltura > alturaTela - 180) {
+      novaAltura = alturaTela - 180;
+      novaLargura = novaAltura * proporcao;
     }
-  } else {
-    setTimeout(() => {
-      card1.classList.remove('flipped');
-      card2.classList.remove('flipped');
-      selectedCards = [];
-    }, 1000);
+
+    // Aplica tamanho no flipbook
+    $('.flipbook').turn('size', novaLargura, novaAltura);
+    $('.flipbook').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
+    $('.book-outer').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
   }
-}
 
-function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
-}
+  $(document).ready(function () {
+    $('.flipbook').turn({
+      width: 1155,
+      height: 768,
+      autoCenter: true,
+      display: 'single'
+    });
 
-function initializeGame() {
-  const gameBoard = document.getElementById('game-board');
-  gameBoard.innerHTML = '';
-  selectedCards = [];
-  matchedCards = [];
-
-  const shuffledCards = shuffleArray([...cardsArray, ...cardsArray]);
-
-  shuffledCards.forEach(image => {
-    const card = createCard(image);
-    gameBoard.appendChild(card);
+    ajustarFlipbook();
+    $(window).on('resize orientationchange', ajustarFlipbook);
   });
-}
-
-function resetGame() {
-  initializeGame();
-}
-
-document.getElementById('back-button').addEventListener('click', () => {
-  window.location.href = '../index.html';
-});
-
-initializeGame();
+</script>
