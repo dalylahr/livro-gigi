@@ -54,12 +54,12 @@ function checkForMatch() {
     matchedCards.push(card1, card2);
     selectedCards = [];
 
-    if (matchedCards.length === cardsArray.length) {
-      setTimeout(() => {
-        alert('Parabéns, você ajudou a Gigi em sua jornada até o Araguaia!');
-        resetGame();
-      }, 500);
-    }
+    if (document.querySelectorAll('.memory-card.flipped').length === cardsArray.length * 2) {
+  setTimeout(() => {
+    alert('Parabéns, você ajudou a Gigi em sua jornada até o Araguaia!');
+    resetGame();
+  }, 500);
+}
   } else {
     setTimeout(() => {
       card1.classList.remove('flipped');
@@ -92,7 +92,7 @@ function resetGame() {
 }
 
 document.getElementById('back-button').addEventListener('click', () => {
-  window.history.back();
+  window.location.href = '../index.html';
 });
 
 initializeGame();
