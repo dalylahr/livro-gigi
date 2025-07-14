@@ -1,58 +1,53 @@
-const cards = document.querySelectorAll('.memory-card');
-let hasFlippedCard = false;
-let lockBoard = false;
-let firstCard, secondCard;
 
-function flipCard() {
-  if (lockBoard || this === firstCard) return;
+const imagens = [
+  'gigi.png',
+  'mae.png',
+  'leo.png',
+  'urubu.png',
+  'gigi-mae.png',
+  'gigi-urubu.png'
+];
 
-  this.classList.add('flip');
+let cartas = [...imagens, ...imagens];
+cartas.sort(() => 0.5 - Math.random());
 
-  if (!hasFlippedCard) {
-    hasFlippedCard = true;
-    firstCard = this;
-    return;
-  }
+const tabuleiro = document.querySelector('.game-board');
+let primeiraCarta = null;
+let travado = false;
 
-  secondCard = this;
-  checkForMatch();
-}
+cartas.forEach((nome) => {
+  const carta = document.createElement('div');
+  carta.classList.add('card');
+  carta.dataset.nome = nome;
 
-function checkForMatch() {
-  const isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+  const img = document.createElement('img');
+  img.src = 'img/' + nome;
+  img.alt = nome;
 
-  isMatch ? disableCards() : unflipCards();
-}
+  carta.appendChild(img);
+  tabuleiro.appendChild(carta);
 
-function disableCards() {
-  firstCard.removeEventListener('click', flipCard);
-  secondCard.removeEventListener('click', flipCard);
-  resetBoard();
-}
+  carta.addEventListener('click', () => {
+    if (travado || carta.classList.contains('flipped')) return;
 
-function unflipCards() {
-  lockBoard = true;
+    carta.classList.add('flipped');
 
-  setTimeout(() => {
-    firstCard.classList.remove('flip');
-    secondCard.classList.remove('flip');
-    resetBoard();
-  }, 1000);
-}
+    if (!primeiraCarta) {
+      primeiraCarta = carta;
+    } else {
+      const segundaCarta = carta;
 
-function resetBoard() {
-  [hasFlippedCard, lockBoard] = [false, false];
-  [firstCard, secondCard] = [null, null];
-}
-
-// Embaralhar as cartas
-(function shuffle() {
-  cards.forEach(card => {
-    let randomPos = Math.floor(Math.random() * cards.length);
-    card.style.order = randomPos;
+      if (primeiraCarta.dataset.nome === segundaCarta.dataset.nome) {
+        primeiraCarta = null;
+      } else {
+        travado = true;
+        setTimeout(() => {
+          primeiraCarta.classList.remove('flipped');
+          segundaCarta.classList.remove('flipped');
+          primeiraCarta = null;
+          travado = false;
+        }, 1000);
+      }
+    }
   });
-})();
-
-// Adicionar evento de clique
-cards.forEach(card => card.addEventListener('click', flipCard));
-
+});
