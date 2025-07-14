@@ -5,6 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Uma Aventura até o Rio Araguaia</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+
+    .book-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .book-outer {
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .flipbook {
+      width: 1155px;
+      height: 768px;
+    }
+
+    .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1000;
+      user-select: none;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    }
+
+    .nav-button.left { left: 10px; }
+    .nav-button.right { right: 10px; }
+
+    .game-section {
+      text-align: center;
+      margin: 30px auto;
+    }
+
+    .game-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .game-buttons a {
+      display: inline-block;
+      padding: 10px 16px;
+      background-color: #ffb703;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .game-buttons a:hover {
+      background-color: #e76f51;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .flipbook {
+        width: 90vw;
+        height: auto;
+      }
+
+      .book-outer {
+        width: 90vw;
+        height: auto;
+      }
+
+      .nav-button {
+        font-size: 1.5rem;
+        padding: 8px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -37,46 +131,46 @@
 
 <script src="jquery.min.js"></script>
 <script src="turn.min.js"></script>
-
 <script>
-function ajustarFlipbook() {
-  const larguraTela = window.innerWidth;
-  const alturaTela = window.innerHeight;
-  const margem = 40;
+  function ajustarFlipbook() {
+    const larguraTela = window.innerWidth;
+    const alturaTela = window.innerHeight;
+    const margem = 40;
 
-  const larguraOriginal = 1155;
-  const alturaOriginal = 768;
+    const larguraOriginal = 1155;
+    const alturaOriginal = 768;
 
-  let novaLargura = larguraOriginal;
-  let novaAltura = alturaOriginal;
+    let novaLargura = larguraOriginal;
+    let novaAltura = alturaOriginal;
 
-  if (larguraTela < larguraOriginal + margem || alturaTela < alturaOriginal + margem) {
-    novaLargura = larguraTela - margem;
-    novaAltura = (novaLargura * alturaOriginal) / larguraOriginal;
+    if (larguraTela < larguraOriginal + margem || alturaTela < alturaOriginal + margem) {
+      novaLargura = larguraTela - margem;
+      novaAltura = (novaLargura * alturaOriginal) / larguraOriginal;
 
-    if (novaAltura > alturaTela - margem) {
-      novaAltura = alturaTela - margem;
-      novaLargura = (novaAltura * larguraOriginal) / alturaOriginal;
+      if (novaAltura > alturaTela - margem) {
+        novaAltura = alturaTela - margem;
+        novaLargura = (novaAltura * larguraOriginal) / alturaOriginal;
+      }
     }
+
+    $('.flipbook').turn('size', novaLargura, novaAltura);
+    $('.flipbook').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
+    $('.book-outer').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
   }
 
-  $('.flipbook').turn('size', novaLargura, novaAltura);
-  $('.flipbook').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
-  $('.book-outer').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
-}
+  $(document).ready(function () {
+    $('.flipbook').turn({
+      width: 1155,
+      height: 768,
+      autoCenter: true,
+      display: 'single'
+    });
 
-$(document).ready(function () {
-  $('.flipbook').turn({
-    width: 1155,
-    height: 768,
-    autoCenter: true,
-    display: 'single'
+    ajustarFlipbook();
+    $(window).on('resize orientationchange', ajustarFlipbook);
   });
-
-  ajustarFlipbook();
-  $(window).on('resize orientationchange', ajustarFlipbook);
-});
 </script>
 
 </body>
 </html>
+
