@@ -8,26 +8,36 @@
 </head>
 <body>
 
-<div class="book-outer">
-  <div class="flipbook">
-    <div class="page"><img src="img/pagina1.jpg" /></div>
-    <div class="page"><img src="img/pagina2.jpg" /></div>
-    <div class="page"><img src="img/pagina3.jpg" /></div>
-    <div class="page"><img src="img/pagina4.jpg" /></div>
-    <div class="page"><img src="img/pagina5.jpg" /></div>
-    <div class="page"><img src="img/pagina6.jpg" /></div>
-    <div class="page"><img src="img/pagina7.jpg" /></div>
-    <div class="page"><img src="img/pagina8.jpg" /></div>
-    <div class="page"><img src="img/pagina9.jpg" /></div>
+<div class="book-wrapper">
+  <div class="book-outer">
+    <div class="flipbook">
+      <div class="page"><img src="img/pagina1.jpg" /></div>
+      <div class="page"><img src="img/pagina2.jpg" /></div>
+      <div class="page"><img src="img/pagina3.jpg" /></div>
+      <div class="page"><img src="img/pagina4.jpg" /></div>
+      <div class="page"><img src="img/pagina5.jpg" /></div>
+      <div class="page"><img src="img/pagina6.jpg" /></div>
+      <div class="page"><img src="img/pagina7.jpg" /></div>
+      <div class="page"><img src="img/pagina8.jpg" /></div>
+      <div class="page"><img src="img/pagina9.jpg" /></div>
+    </div>
+    <div class="nav-button left" onclick="$('.flipbook').turn('previous')">⬅️</div>
+    <div class="nav-button right" onclick="$('.flipbook').turn('next')">➡️</div>
   </div>
 </div>
 
-<div class="nav-button left" onclick="$('.flipbook').turn('previous')">⬅️</div>
-<div class="nav-button right" onclick="$('.flipbook').turn('next')">➡️</div>
+<div class="game-section">
+  <h2>Ajude a Gigi a chegar no Araguaia:</h2>
+  <div class="game-buttons">
+    <a href="memoria/index.html">🧠 Jogo da Memória</a>
+    <a href="#">🚸 Caminho Seguro</a>
+    <a href="#">🌱 Ecologia do Cerrado</a>
+  </div>
+</div>
 
 <script src="jquery.min.js"></script>
 <script src="turn.min.js"></script>
-  
+
 <script>
 function ajustarFlipbook() {
   const larguraTela = window.innerWidth;
@@ -40,7 +50,6 @@ function ajustarFlipbook() {
   let novaLargura = larguraOriginal;
   let novaAltura = alturaOriginal;
 
-  // Se for menor que o original, ajusta proporcionalmente
   if (larguraTela < larguraOriginal + margem || alturaTela < alturaOriginal + margem) {
     novaLargura = larguraTela - margem;
     novaAltura = (novaLargura * alturaOriginal) / larguraOriginal;
@@ -55,29 +64,19 @@ function ajustarFlipbook() {
   $('.flipbook').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
   $('.book-outer').css({ width: novaLargura + 'px', height: novaAltura + 'px' });
 }
-  $(document).ready(function () {
-    $('.flipbook').turn({
-      width: 1155,
-      height: 768,
-      autoCenter: true,
-      display: 'single'
-    });
 
-    ajustarFlipbook();
-    $(window).on('resize orientationchange', ajustarFlipbook);
+$(document).ready(function () {
+  $('.flipbook').turn({
+    width: 1155,
+    height: 768,
+    autoCenter: true,
+    display: 'single'
   });
+
+  ajustarFlipbook();
+  $(window).on('resize orientationchange', ajustarFlipbook);
+});
 </script>
 
-<div class="game-section">
-  <h2>Ajude a Gigi a chegar no Araguaia:</h2>
-  <div class="game-buttons">
-    <a href="memoria/index.html">🧠 Jogo da Memória</a>
-    <a href="#">🚸 Caminho Seguro</a>
-    <a href="#">🌱 Ecologia do Cerrado</a>
-  </div>
-</div>
-
-  
 </body>
 </html>
-
