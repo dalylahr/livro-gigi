@@ -38,3 +38,21 @@ h1 {
   pointer-events: none;
   opacity: 0.6;
 }
+.nav-back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  background-color: #f4a261;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.nav-back:hover {
+  background-color: #e76f51;
+}
