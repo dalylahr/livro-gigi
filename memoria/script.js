@@ -58,7 +58,7 @@ function checkForMatch() {
     const totalPairs = cardsArray.length;
     if (matchedCards.length === totalPairs * 2) {
       setTimeout(() => {
-        alert('Parabéns, você ajudou a Gigi em sua jornada até o Araguaia!');
+      showModalAndRestart();
         resetGame();
       }, 500);
     }
@@ -96,5 +96,14 @@ function resetGame() {
 document.getElementById('back-button').addEventListener('click', () => {
   window.location.href = 'https://dalylahr.github.io/livro-gigi/';
 });
+
+function showModalAndRestart() {
+  const modal = document.getElementById('custom-modal');
+  modal.style.display = 'flex';
+  setTimeout(() => {
+    modal.style.display = 'none';
+    resetGame();
+  }, 3000);
+}
 
 initializeGame();
