@@ -1,56 +1,74 @@
 body {
-  font-family: sans-serif;
-  text-align: center;
-  background: #f5f5dc;
+  font-family: Arial, sans-serif;
+  background-color: #fdfbe6;
   margin: 0;
   padding: 20px;
+  text-align: center;
 }
+
 h1 {
-  color: #444;
+  margin-bottom: 20px;
 }
+
 .game-board {
-  width: 90vw;
-  max-width: 600px;
-  margin: 20px auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 700px;
+  margin: 0 auto;
 }
-.card {
-  width: 100%;
-  aspect-ratio: 1;
-  background-color: #ddd;
-  cursor: pointer;
+
+.memory-card {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  perspective: 1000px;
   position: relative;
-  border-radius: 10px;
-  overflow: hidden;
+  cursor: pointer;
 }
-.card img {
+
+.front-face, .back-face {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: none;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s;
 }
-.card.flipped img {
-  display: block;
+
+.front-face {
+  transform: rotateY(180deg);
+  object-fit: contain;
+  background-color: #fff;
+  border: 2px solid #ccc;
 }
-.card.matched {
-  pointer-events: none;
-  opacity: 0.6;
-}
-.nav-back {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  padding: 10px 16px;
+
+.back-face {
   background-color: #f4a261;
-  color: white;
-  border: none;
-  border-radius: 8px;
+  transform: rotateY(0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memory-card.flipped .front-face {
+  transform: rotateY(0deg);
+}
+
+.memory-card.flipped .back-face {
+  transform: rotateY(180deg);
+}
+
+.nav-back {
+  margin-top: 30px;
+  padding: 10px 20px;
   font-size: 1rem;
+  background-color: #ffb703;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .nav-back:hover {
