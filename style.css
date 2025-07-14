@@ -102,3 +102,9 @@ body {
 .game-buttons a:hover {
   background-color: #e76f51;
 }
+
+.page img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
