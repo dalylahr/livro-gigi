@@ -54,7 +54,9 @@ function checkForMatch() {
     matchedCards.push(card1, card2);
     selectedCards = [];
 
-    if (matchedCards.length === cardsArray.length) {
+    // Verifica se o total de pares encontrados equivale à metade do total de cartas
+    const totalPairs = cardsArray.length;
+    if (matchedCards.length === totalPairs * 2) {
       setTimeout(() => {
         alert('Parabéns, você ajudou a Gigi em sua jornada até o Araguaia!');
         resetGame();
@@ -92,7 +94,7 @@ function resetGame() {
 }
 
 document.getElementById('back-button').addEventListener('click', () => {
-  window.history.back();
+  window.location.href = 'https://dalylahr.github.io/livro-gigi/';
 });
 
 initializeGame();
