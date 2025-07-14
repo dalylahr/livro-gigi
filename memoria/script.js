@@ -54,8 +54,8 @@ function checkForMatch() {
     matchedCards.push(card1, card2);
     selectedCards = [];
 
-    if (document.querySelectorAll('.memory-card.flipped').length === cardsArray.length * 2) {
-  setTimeout(() => {
+  if (document.querySelectorAll('.memory-card.flipped').length === cardsArray.length * 2) {
+    setTimeout(() => {
     alert('Parabéns, você ajudou a Gigi em sua jornada até o Araguaia!');
     resetGame();
   }, 500);
