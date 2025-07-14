@@ -1,13 +1,14 @@
 const cardsArray = [
   'gigi.png',
-  'papai.png',
-  'vovo.png',
-  'juntos.png',
-  'vovo-gigi.png',
   'arara.png',
+  'gigi-mae.png',
+  'gigi-urubu.png',
+  'leo.png',
   'lobo.png',
+  'mae.png',
   'placa.png',
   'preservada.png',
+  'urubu.png',
   'tatu.png'
 ];
 
