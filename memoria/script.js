@@ -1,14 +1,13 @@
 const cardsArray = [
   'gigi.png',
+  'papai.png',
+  'vovo.png',
+  'juntos.png',
+  'vovo-gigi.png',
   'arara.png',
-  'gigi-mae.png',
-  'gigi-urubu.png',
-  'leo.png',
   'lobo.png',
-  'mae.png',
   'placa.png',
   'preservada.png',
-  'urubu.png',
   'tatu.png'
 ];
 
@@ -54,12 +53,12 @@ function checkForMatch() {
     matchedCards.push(card1, card2);
     selectedCards = [];
 
-  if (document.querySelectorAll('.memory-card.flipped').length === cardsArray.length * 2) {
-    setTimeout(() => {
-    alert('Parabéns, você ajudou a Gigi em sua jornada até o Araguaia!');
-    resetGame();
-  }, 500);
-}
+    if (matchedCards.length === cardsArray.length) {
+      setTimeout(() => {
+        alert('Parabéns, você ajudou a Gigi em sua jornada até o Araguaia!');
+        resetGame();
+      }, 500);
+    }
   } else {
     setTimeout(() => {
       card1.classList.remove('flipped');
@@ -92,7 +91,7 @@ function resetGame() {
 }
 
 document.getElementById('back-button').addEventListener('click', () => {
-  window.location.href = '../index.html';
+  window.history.back();
 });
 
 initializeGame();
