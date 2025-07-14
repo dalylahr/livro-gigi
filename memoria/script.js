@@ -54,12 +54,10 @@ function checkForMatch() {
     matchedCards.push(card1, card2);
     selectedCards = [];
 
-    // Verifica se o total de pares encontrados equivale à metade do total de cartas
     const totalPairs = cardsArray.length;
     if (matchedCards.length === totalPairs * 2) {
       setTimeout(() => {
-      showModalAndRestart();
-        resetGame();
+        showModalAndRestart(); // só ela aqui!
       }, 500);
     }
   } else {
@@ -100,9 +98,10 @@ document.getElementById('back-button').addEventListener('click', () => {
 function showModalAndRestart() {
   const modal = document.getElementById('custom-modal');
   modal.style.display = 'flex';
+
   setTimeout(() => {
     modal.style.display = 'none';
-    resetGame();
+    initializeGame();
   }, 3000);
 }
 
